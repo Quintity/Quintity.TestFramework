@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Quintity.TestFramework.Core.TestArtifact" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAECAAAAAAAAAAAAAAQIAAAAAAAAAA=</HashCode>
+      <FileName>TestArtifact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestParameterCollection" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestParameterCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestObject" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestStep" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAABAAQMGAQAACICAAQAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>TestStep.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestCase" Collapsed="true">
+    <Position X="10.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAAAAIAAAAAAAQcCAAAAAAAAAQAAAAAAAAAAAAiAAA=</HashCode>
+      <FileName>TestCase.cs</FileName>
+      <NewMemberFileName>TestSuite.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestCheck" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAEEkQgAAgEQARAAAgABAAARAAIAAAAEAAAACA=</HashCode>
+      <FileName>TestCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestCheckCollection" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestCheckCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestSuiteResult" Collapsed="true">
+    <Position X="2" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAECAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestSuiteResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestStepResult" Collapsed="true">
+    <Position X="7" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAIAAAAAgAAECAAAAAQAjAAAAQACAAQAAQAAgAA=</HashCode>
+      <FileName>TestStepResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestCaseResult" Collapsed="true">
+    <Position X="5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAECAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestCaseResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestScriptObjectContainerResult" Collapsed="true">
+    <Position X="2.5" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BAAgEAAAAAAAAAAEAAgAAAAABAAATAQQEBIAAAAAAAA=</HashCode>
+      <FileName>TestScriptObjectContainerResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestScriptObjectResult" Collapsed="true">
+    <Position X="5.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAIAAAAAAEAAAAAAIAIAAgAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>TestScriptObjectResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestScriptObject" Collapsed="true">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAgAEAEAAAAAAgAAACAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>TestScriptObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestScriptObjectContainer" Collapsed="true">
+    <Position X="8.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEABAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>TestScriptObjectContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quintity.TestFramework.Core.TestSuite" Collapsed="true">
+    <Position X="7.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAEBIAAAAAAAQECAAAAAAAAAAAABAAAoAAACAAAAA=</HashCode>
+      <FileName>TestSuite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

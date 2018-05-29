@@ -1,0 +1,4 @@
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csprojResolveAssemblyReference.cache
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.Properties.Resources.resources
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csproj.GenerateResource.Cache
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csproj.CoreCompileInputs.cache
