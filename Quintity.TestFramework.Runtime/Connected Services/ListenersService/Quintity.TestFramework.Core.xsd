@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfTestListenerDescriptor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestListenerDescriptor" nillable="true" type="tns:TestListenerDescriptor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTestListenerDescriptor" nillable="true" type="tns:ArrayOfTestListenerDescriptor" />
+  <xs:complexType name="TestListenerDescriptor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:Status" />
+      <xs:element minOccurs="0" name="OnFailure" type="tns:OnFailure" />
+      <xs:element minOccurs="0" name="Assembly" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Parameters" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestListenerDescriptor" nillable="true" type="tns:TestListenerDescriptor" />
+  <xs:simpleType name="Status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Incomplete" />
+      <xs:enumeration value="Inactive" />
+      <xs:enumeration value="Active" />
+      <xs:enumeration value="Obsolete" />
+      <xs:enumeration value="Unavailable" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Status" nillable="true" type="tns:Status" />
+  <xs:simpleType name="OnFailure">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Continue" />
+      <xs:enumeration value="Stop" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OnFailure" nillable="true" type="tns:OnFailure" />
+  <xs:complexType name="TestProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="VirtualUsers" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeSpan" type="ser:duration" />
+      <xs:element minOccurs="0" name="NameFormat" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestProfile" nillable="true" type="tns:TestProfile" />
+  <xs:complexType name="TestExecutionBeginArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_testScriptObject" nillable="true" type="tns:TestScriptObject" />
+      <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestExecutionBeginArgs" nillable="true" type="tns:TestExecutionBeginArgs" />
+  <xs:complexType name="TestScriptObject">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestArtifact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_parentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="_userId" nillable="true" type="xs:string" />
+          <xs:element name="_title" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_status" type="tns:Status" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestScriptObject" nillable="true" type="tns:TestScriptObject" />
+  <xs:complexType name="TestArtifact">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestObject">
+        <xs:sequence>
+          <xs:element name="_systemId" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestArtifact" nillable="true" type="tns:TestArtifact" />
+  <xs:complexType name="TestObject">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="TestObject" nillable="true" type="tns:TestObject" />
+  <xs:complexType name="TestSuite">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObjectContainer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_project" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_testPreprocessor" nillable="true" type="tns:TestPreprocessor" />
+          <xs:element minOccurs="0" name="_testPostProcessor" nillable="true" type="tns:TestPostprocessor" />
+          <xs:element minOccurs="0" name="_filePath" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestSuite" nillable="true" type="tns:TestSuite" />
+  <xs:complexType name="TestScriptObjectContainer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_functionalArea" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_reference" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_author" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_created" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="_testProperties" nillable="true" type="tns:TestPropertyCollection" />
+          <xs:element minOccurs="0" name="_testScriptObjects" nillable="true" type="tns:TestScriptObjects" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestScriptObjectContainer" nillable="true" type="tns:TestScriptObjectContainer" />
+  <xs:complexType name="TestPropertyCollection">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestProperty" nillable="true" type="tns:TestProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestPropertyCollection" nillable="true" type="tns:TestPropertyCollection" />
+  <xs:complexType name="TestProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestProperty" nillable="true" type="tns:TestProperty" />
+  <xs:complexType name="TestScriptObjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestScriptObject" nillable="true" type="tns:TestScriptObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestScriptObjects" nillable="true" type="tns:TestScriptObjects" />
+  <xs:complexType name="TestCase">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObjectContainer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_tags" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_knownDefects" type="xs:boolean" />
+          <xs:element minOccurs="0" name="_defects" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_onTestStepFailure" type="tns:OnFailure" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestCase" nillable="true" type="tns:TestCase" />
+  <xs:complexType name="TestStep">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_expectedBehaviour" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_testType" type="tns:TestType" />
+          <xs:element minOccurs="0" name="_iterations" type="xs:int" />
+          <xs:element minOccurs="0" name="_alwaysExecute" type="xs:boolean" />
+          <xs:element minOccurs="0" name="_expectedTestVerdict" type="tns:TestVerdict" />
+          <xs:element minOccurs="0" name="_testAutomationDefinition" nillable="true" type="tns:TestAutomationDefinition" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestStep" nillable="true" type="tns:TestStep" />
+  <xs:simpleType name="TestType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Automated" />
+      <xs:enumeration value="Manual" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TestType" nillable="true" type="tns:TestType" />
+  <xs:simpleType name="TestVerdict">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Fail" />
+      <xs:enumeration value="Pass" />
+      <xs:enumeration value="Inconclusive" />
+      <xs:enumeration value="DidNotExecute" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TestVerdict" nillable="true" type="tns:TestVerdict" />
+  <xs:complexType name="TestAutomationDefinition">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_testAssembly" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_testClass" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_testMethod" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_testParameters" nillable="true" type="tns:TestParameters" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestAutomationDefinition" nillable="true" type="tns:TestAutomationDefinition" />
+  <xs:complexType name="TestParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestParameter" nillable="true" type="tns:TestParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestParameters" nillable="true" type="tns:TestParameters" />
+  <xs:complexType name="TestParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValueAsString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TypeAsString" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestParameter" nillable="true" type="tns:TestParameter" />
+  <xs:complexType name="TestPreprocessor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestProcessor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_onFailure" type="tns:OnFailure" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestPreprocessor" nillable="true" type="tns:TestPreprocessor" />
+  <xs:complexType name="TestProcessor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_ignoreResult" type="xs:boolean" />
+          <xs:element minOccurs="0" name="_testAutomationDefinition" nillable="true" type="tns:TestAutomationDefinition" />
+          <xs:element minOccurs="0" name="_testType" type="tns:TestType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestProcessor" nillable="true" type="tns:TestProcessor" />
+  <xs:complexType name="TestPostprocessor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestProcessor">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestPostprocessor" nillable="true" type="tns:TestPostprocessor" />
+  <xs:complexType name="TestExecutionCompleteArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_elapsedTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="_explanation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_terminationSource" type="tns:TerminationReason" />
+      <xs:element minOccurs="0" name="_testScriptObject" nillable="true" type="tns:TestScriptObject" />
+      <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestExecutionCompleteArgs" nillable="true" type="tns:TestExecutionCompleteArgs" />
+  <xs:simpleType name="TerminationReason">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="UserInitiated" />
+      <xs:enumeration value="RuntimeStopRequest" />
+      <xs:enumeration value="ListenerError" />
+      <xs:enumeration value="RuntimeException" />
+      <xs:enumeration value="UnhandledException" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TerminationReason" nillable="true" type="tns:TerminationReason" />
+  <xs:complexType name="TestSuiteBeginExecutionArgs">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObjectBeginExecutionArgs">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestSuiteBeginExecutionArgs" nillable="true" type="tns:TestSuiteBeginExecutionArgs" />
+  <xs:complexType name="TestScriptObjectBeginExecutionArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestScriptObjectBeginExecutionArgs" nillable="true" type="tns:TestScriptObjectBeginExecutionArgs" />
+  <xs:complexType name="TestProcessorBeginExecutionArgs">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObjectBeginExecutionArgs">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestProcessorBeginExecutionArgs" nillable="true" type="tns:TestProcessorBeginExecutionArgs" />
+  <xs:complexType name="TestProcessorResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestStepResult">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestProcessorResult" nillable="true" type="tns:TestProcessorResult" />
+  <xs:complexType name="TestStepResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_testChecks" nillable="true" type="tns:TestChecks" />
+          <xs:element minOccurs="0" name="_testWarnings" nillable="true" type="tns:TestWarnings" />
+          <xs:element minOccurs="0" name="_testData" nillable="true" type="tns:TestData" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestStepResult" nillable="true" type="tns:TestStepResult" />
+  <xs:complexType name="TestScriptResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestArtifact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_referenceID" type="ser:guid" />
+          <xs:element minOccurs="0" name="_testVerdict" type="tns:TestVerdict" />
+          <xs:element minOccurs="0" name="_testMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_startTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="_endTime" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestScriptResult" nillable="true" type="tns:TestScriptResult" />
+  <xs:complexType name="TestChecks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestCheck" nillable="true" type="tns:TestCheck" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestChecks" nillable="true" type="tns:TestChecks" />
+  <xs:complexType name="TestCheck">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestArtifact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_verdict" type="tns:TestVerdict" />
+          <xs:element minOccurs="0" name="_comment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_source" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestCheck" nillable="true" type="tns:TestCheck" />
+  <xs:complexType name="TestWarnings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestWarning" nillable="true" type="tns:TestWarning" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestWarnings" nillable="true" type="tns:TestWarnings" />
+  <xs:complexType name="TestWarning">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestArtifact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_comment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_source" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestWarning" nillable="true" type="tns:TestWarning" />
+  <xs:complexType name="TestData">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="DataKey" nillable="true" type="xs:string" />
+            <xs:element name="DataValue" nillable="true" type="xs:anyType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestData" nillable="true" type="tns:TestData" />
+  <xs:complexType name="TestSuiteResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptResultContainer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_postProcessorResult" nillable="true" type="tns:TestProcessorResult" />
+          <xs:element minOccurs="0" name="_preProcessorResult" nillable="true" type="tns:TestProcessorResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestSuiteResult" nillable="true" type="tns:TestSuiteResult" />
+  <xs:complexType name="TestScriptResultContainer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_passed" type="xs:int" />
+          <xs:element minOccurs="0" name="_failed" type="xs:int" />
+          <xs:element minOccurs="0" name="_errored" type="xs:int" />
+          <xs:element minOccurs="0" name="_inconclusive" type="xs:int" />
+          <xs:element minOccurs="0" name="_didnotexecute" type="xs:int" />
+          <xs:element minOccurs="0" name="_testScriptResults" nillable="true" type="tns:TestScriptResults" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestScriptResultContainer" nillable="true" type="tns:TestScriptResultContainer" />
+  <xs:complexType name="TestScriptResults">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestScriptResult" nillable="true" type="tns:TestScriptResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestScriptResults" nillable="true" type="tns:TestScriptResults" />
+  <xs:complexType name="TestCaseResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptResultContainer">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestCaseResult" nillable="true" type="tns:TestCaseResult" />
+  <xs:complexType name="TestCaseBeginExecutionArgs">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObjectBeginExecutionArgs">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestCaseBeginExecutionArgs" nillable="true" type="tns:TestCaseBeginExecutionArgs" />
+  <xs:complexType name="TestStepBeginExecutionArgs">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestScriptObjectBeginExecutionArgs">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestStepBeginExecutionArgs" nillable="true" type="tns:TestStepBeginExecutionArgs" />
+  <xs:complexType name="TestMetricEventArgs">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TestArtifact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="_description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_elapsedTime" type="ser:duration" />
+          <xs:element minOccurs="0" name="_perfId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="_startTime" type="xs:dateTime" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="_stateArgs" nillable="true" type="q2:ArrayOfstring" />
+          <xs:element minOccurs="0" name="_stopTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="_virtualUser" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TestMetricEventArgs" nillable="true" type="tns:TestMetricEventArgs" />
+  <xs:complexType name="TestListenersCompleteArgs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Explanation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminationSource" type="tns:TerminationReason" />
+      <xs:element minOccurs="0" name="TestProfile" nillable="true" type="tns:TestProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestListenersCompleteArgs" nillable="true" type="tns:TestListenersCompleteArgs" />
+</xs:schema>

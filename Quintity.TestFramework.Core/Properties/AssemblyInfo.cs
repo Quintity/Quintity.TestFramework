@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Quintity.TestFramework.Core")]
 [assembly: AssemblyDescription(
-    "The Quintity TestFramework assembly contains class definitions (test suites, cases and steps) for building an " +
+    "The Quintity TestFramework core assembly contains class definitions (test suites, cases and steps) for building an " +
     "automated test solution.  The assembly also contains the runtime test execution engine.")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

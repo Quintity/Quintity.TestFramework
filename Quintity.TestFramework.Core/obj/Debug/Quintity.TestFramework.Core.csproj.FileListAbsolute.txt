@@ -1,4 +1,13 @@
-C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csprojResolveAssemblyReference.cache
 C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.Properties.Resources.resources
 C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csproj.GenerateResource.Cache
 C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csproj.CoreCompileInputs.cache
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csprojAssemblyReference.cache
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\bin\Debug\Quintity.TestFramework.Core.dll.config
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\bin\Debug\Quintity.TestFramework.Core.dll
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\bin\Debug\Quintity.TestFramework.Core.pdb
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\bin\Debug\GenericDictionaryEditor.dll
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\bin\Debug\log4net.dll
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\bin\Debug\log4net.xml
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.csproj.CopyComplete
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.dll
+C:\DevProjects\Quintity\Repos\Quintity.TestFramework\Quintity.TestFramework.Core\obj\Debug\Quintity.TestFramework.Core.pdb
