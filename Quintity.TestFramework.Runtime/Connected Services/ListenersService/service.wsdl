@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ListenerEvents" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IListenerEvents_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IListenerEvents_ServiceAvailability_InputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceAvailability" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_ServiceAvailability_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceAvailabilityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_InitializeService_InputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeService" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_InitializeService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestExecutionBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestExecutionBegin" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestExecutionComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestExecutionComplete" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestSuiteExecutionBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestSuiteExecutionBegin" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestPreprocessorBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestPreprocessorBegin" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestPreprocessorComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestPreprocessorComplete" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestPostprocessorBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestPostprocessorBegin" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestPostprocessorComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestPostprocessorComplete" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestSuiteExecutionComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestSuiteExecutionComplete" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestCaseExecutionBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestCaseExecutionBegin" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestCaseExecutionComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestCaseExecutionComplete" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestStepExecutionBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestStepExecutionBegin" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestStepExecutionComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestStepExecutionComplete" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestCheck" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestWarning_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestWarning" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestTrace_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestTrace" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_OnTestMetric_InputMessage">
+    <wsdl:part name="parameters" element="tns:OnTestMetric" />
+  </wsdl:message>
+  <wsdl:message name="IListenerEvents_TestListenersCompleteNotification_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TestListenersCompleteNotification" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IListenerEvents">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ServiceAvailability">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/ServiceAvailability" message="tns:IListenerEvents_ServiceAvailability_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListenerEvents/ServiceAvailabilityResponse" message="tns:IListenerEvents_ServiceAvailability_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="InitializeService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/InitializeService" message="tns:IListenerEvents_InitializeService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IListenerEvents/InitializeServiceResponse" message="tns:IListenerEvents_InitializeService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestExecutionBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestExecutionBegin" message="tns:IListenerEvents_OnTestExecutionBegin_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestExecutionComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestExecutionComplete" message="tns:IListenerEvents_OnTestExecutionComplete_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestSuiteExecutionBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestSuiteExecutionBegin" message="tns:IListenerEvents_OnTestSuiteExecutionBegin_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestPreprocessorBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestPreprocessorBegin" message="tns:IListenerEvents_OnTestPreprocessorBegin_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestPreprocessorComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestPreprocessorComplete" message="tns:IListenerEvents_OnTestPreprocessorComplete_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestPostprocessorBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestPostprocessorBegin" message="tns:IListenerEvents_OnTestPostprocessorBegin_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestPostprocessorComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestPostprocessorComplete" message="tns:IListenerEvents_OnTestPostprocessorComplete_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestSuiteExecutionComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestSuiteExecutionComplete" message="tns:IListenerEvents_OnTestSuiteExecutionComplete_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestCaseExecutionBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestCaseExecutionBegin" message="tns:IListenerEvents_OnTestCaseExecutionBegin_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestCaseExecutionComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestCaseExecutionComplete" message="tns:IListenerEvents_OnTestCaseExecutionComplete_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestStepExecutionBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestStepExecutionBegin" message="tns:IListenerEvents_OnTestStepExecutionBegin_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestStepExecutionComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestStepExecutionComplete" message="tns:IListenerEvents_OnTestStepExecutionComplete_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestCheck" message="tns:IListenerEvents_OnTestCheck_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestWarning">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestWarning" message="tns:IListenerEvents_OnTestWarning_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestTrace">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestTrace" message="tns:IListenerEvents_OnTestTrace_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestMetric">
+      <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestMetric" message="tns:IListenerEvents_OnTestMetric_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TestListenersCompleteNotification">
+      <wsdl:output wsaw:Action="http://tempuri.org/IListenerEvents/TestListenersCompleteNotification" message="tns:IListenerEvents_TestListenersCompleteNotification_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IListenerEvents" type="tns:IListenerEvents">
+    <wsp:PolicyReference URI="#NetTcpBinding_IListenerEvents_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ServiceAvailability">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/ServiceAvailability" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeService">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/InitializeService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestExecutionBegin">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestExecutionBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestExecutionComplete">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestExecutionComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestSuiteExecutionBegin">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestSuiteExecutionBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestPreprocessorBegin">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestPreprocessorBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestPreprocessorComplete">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestPreprocessorComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestPostprocessorBegin">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestPostprocessorBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestPostprocessorComplete">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestPostprocessorComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestSuiteExecutionComplete">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestSuiteExecutionComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestCaseExecutionBegin">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestCaseExecutionBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestCaseExecutionComplete">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestCaseExecutionComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestStepExecutionBegin">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestStepExecutionBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestStepExecutionComplete">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestStepExecutionComplete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestCheck">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestWarning">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestWarning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestTrace">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestTrace" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OnTestMetric">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/OnTestMetric" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="TestListenersCompleteNotification">
+      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/TestListenersCompleteNotification" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ListenerEvents">
+    <wsdl:port name="NetTcpBinding_IListenerEvents" binding="tns:NetTcpBinding_IListenerEvents">
+      <soap12:address location="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
