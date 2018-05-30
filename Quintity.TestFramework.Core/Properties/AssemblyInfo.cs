@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Quintity.TestFramework.Core")]
 [assembly: AssemblyDescription(
     "The Quintity TestFramework core assembly contains class definitions (test suites, cases and steps) for building an " +
-    "automated test solution.  The assembly also contains the runtime test execution engine.")]
+    "automated test solution.")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
