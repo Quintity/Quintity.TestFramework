@@ -238,7 +238,7 @@ namespace Quintity.TestFramework.Core
 
             TestAutomationDefinition.ResultStruct resultStruct = TestAutomationDefinition.Invoke(testClassDictionary);
 
-            result.SetStartTime(resultStruct.StartTime.ToUniversalTime());
+            result.SetStartTime(resultStruct.StartTime);
             result.SetEndTime(resultStruct.EndTime);
             result.SetTestVerdict(determineVerdict(ExpectedTestVerdict, resultStruct.TestVerdict));
             result.SetTestMessage(resultStruct.TestMessage);
