@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Threading;
 using System.Collections.Generic;
 using Quintity.TestFramework.Core;
+using Quintity.TestFramework.Runtime.ListenersService;
+using System.ServiceModel;
 
 namespace Quintity.TestFramework.Runtime
 {
@@ -81,8 +83,7 @@ namespace Quintity.TestFramework.Runtime
         private static readonly log4net.ILog LogEvent = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         //TODO - remove? static bool m_continue;  
         static internal bool SuppressExecution = false;
-        //TODO:  05/26/2018 Need to fix up when resolving test listerner service.
-        private ListenersService.ListenerEventsClient _listenerServiceClient = null;
+        private ListenerEventsClient _listenerEventsClient = null;
         private TestScriptObject _initialTestScriptObject;
         private Timer _executionTimer = null;
         private Thread _mainExecutionThread;
@@ -137,10 +138,7 @@ namespace Quintity.TestFramework.Runtime
 
                     _testListeners = fixupTestListeners(testListeners);
 
-                    //TODO:  Fix up
-                    //_listenerServiceClient = new ListenersService.Client.ListenerClient();
-
-                    //var qualifiedListeners = _listenerServiceClient.Initialize(_testListeners, _testProfile);
+                    _listenerEventsClient = getListenerEventsClient();
 
                     //if (qualifiedListeners != 0)
                     //{
@@ -174,25 +172,33 @@ namespace Quintity.TestFramework.Runtime
             }
         }
 
+        /// <summary>
+        /// Iterates through the test listener collection for active listeners s
+        /// expanding each parameter value for subsequent use.
+        /// </summary>
+        /// <param name="testListeners">The passed in test listener collection.</param>
+        /// <returns>Fixed up collection.</returns>
         private TestListenerCollection fixupTestListeners(TestListenerCollection testListeners)
         {
             var activeListeners = testListeners.FindAll(x => x.Status == Status.Active && x.Parameters != null);
 
             foreach(var activeListener in activeListeners)
             {
+                // Create new collection to hold updated values.
                 var newParameters = new Dictionary<string, string>();
 
                 foreach (var parameter in activeListener.Parameters)
                 {
                     var key = parameter.Key;
                     var expandedValue = TestProperties.ExpandString(parameter.Value);
-
                     newParameters.Add(key, expandedValue);
                 }
 
+                // Replace old collection with fixedup collection.
                 activeListener.Parameters = newParameters;
             }
 
+            // Return fixed up collection
             return new TestListenerCollection(activeListeners) ;
         }
 
@@ -237,7 +243,7 @@ namespace Quintity.TestFramework.Runtime
 
         public void StopExecution(string virtualUser, TerminationReason terminationSource, string explanation = null)
         {
-            _listenerServiceClient = null;
+            _listenerEventsClient = null;
             _testListenersComplete = true;
 
             fireTestExecutionFinalizedEvent();
@@ -265,6 +271,11 @@ namespace Quintity.TestFramework.Runtime
         #endregion
 
         #region Class private methods
+
+        private ListenerEventsClient getListenerEventsClient()
+        {
+            return new ListenersService.ListenerEventsClient(new InstanceContext(this));
+        }
 
         /// <summary>
         /// Executes the test script object

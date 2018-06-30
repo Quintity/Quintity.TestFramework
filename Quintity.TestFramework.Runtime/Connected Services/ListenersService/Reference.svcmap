@@ -27,6 +27,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="821e6ee9-f37e-48c3-b36b-1068374a7e5a" SourceId="1" SourceUrl="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="15b1d3bb-7b0a-4f21-8708-33ca80077326" SourceId="1" SourceUrl="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7fa0a616-3154-413f-92da-1f3af672db34" SourceId="1" SourceUrl="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/mex" />
+    <MetadataFile FileName="Quintity.TestFramework.Runtime.xsd" MetadataType="Schema" ID="576c6c1e-81f2-4038-8d38-e920b5163cae" SourceId="1" SourceUrl="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/mex" />
     <MetadataFile FileName="Quintity.TestFramework.Core.xsd" MetadataType="Schema" ID="c8d687ae-d41b-460c-b6cc-df4df9c09597" SourceId="1" SourceUrl="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="05d7869d-574f-452c-941f-4cc195fda726" SourceId="1" SourceUrl="net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService/mex" />
   </Metadata>

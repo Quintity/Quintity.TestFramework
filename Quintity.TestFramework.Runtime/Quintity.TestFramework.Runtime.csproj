@@ -78,6 +78,9 @@
     <None Include="Connected Services\ListenersService\Quintity.TestFramework.Core.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ListenersService\Quintity.TestFramework.Runtime.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ListenersService\service.wsdl" />
     <None Include="Connected Services\ListenersService\service.xsd">
       <SubType>Designer</SubType>

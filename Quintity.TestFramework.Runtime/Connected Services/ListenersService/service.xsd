@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" />
   <xs:element name="ServiceAvailability">
     <xs:complexType>
@@ -16,7 +17,7 @@
   <xs:element name="InitializeService">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" minOccurs="0" name="testListeners" nillable="true" type="q1:ArrayOfTestListenerDescriptor" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime" minOccurs="0" name="testListeners" nillable="true" type="q1:ArrayOfTestListenerDescriptor" />
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" minOccurs="0" name="testProfile" nillable="true" type="q2:TestProfile" />
       </xs:sequence>
     </xs:complexType>
@@ -155,8 +156,8 @@
   <xs:element name="TestListenersCompleteNotification">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" minOccurs="0" name="testListeners" nillable="true" type="q28:ArrayOfTestListenerDescriptor" />
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" minOccurs="0" name="args" nillable="true" type="q29:TestListenersCompleteArgs" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime" minOccurs="0" name="testListeners" nillable="true" type="q28:ArrayOfTestListenerDescriptor" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime" minOccurs="0" name="args" nillable="true" type="q29:TestListenersCompleteArgs" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

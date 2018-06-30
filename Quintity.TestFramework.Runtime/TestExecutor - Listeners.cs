@@ -150,12 +150,12 @@ namespace Quintity.TestFramework.Runtime
 
         private void TestExecutor_OnExecutionBegin(TestExecutor testExecutor, TestExecutionBeginArgs args)
         {
-            _listenerServiceClient?.OnTestExecutionBegin(args);
+            _listenerEventsClient?.OnTestExecutionBegin(args);
         }
 
         private void TestExecutor_OnExecutionComplete(TestExecutor testExecutor, TestExecutionCompleteArgs args)
         {
-            _listenerServiceClient?.OnTestExecutionComplete(args);
+            _listenerEventsClient?.OnTestExecutionComplete(args);
 
             _virtualUserRuntimeState.Remove(args.VirtualUser);
 
@@ -176,76 +176,76 @@ namespace Quintity.TestFramework.Runtime
         {
             TestProperties.SetPropertyValue("CurrentTestSuite", testScriptObject);
 
-            _listenerServiceClient?.OnTestSuiteExecutionBegin((TestSuite)testScriptObject, args);
+            _listenerEventsClient?.OnTestSuiteExecutionBegin((TestSuite)testScriptObject, args);
         }
 
         private void TestSuite_OnTestPreprocessorBegin(TestSuite testSuite, TestProcessorBeginExecutionArgs args)
         {
-            _listenerServiceClient?.OnTestPreprocessorBegin(testSuite, args);
+            _listenerEventsClient?.OnTestPreprocessorBegin(testSuite, args);
         }
         
         private void TestSuite_OnTestPreprocessorComplete(TestSuite testSuite, TestProcessorResult testProcessorResult)
         {
-            _listenerServiceClient?.OnTestPreprocessorComplete(testSuite, testProcessorResult);
+            _listenerEventsClient?.OnTestPreprocessorComplete(testSuite, testProcessorResult);
         }
 
         private void TestSuite_OnTestPostprocessorBegin(TestSuite testSuite, TestProcessorBeginExecutionArgs args)
         {
-            _listenerServiceClient?.OnTestPostprocessorBegin(testSuite, args);
+            _listenerEventsClient?.OnTestPostprocessorBegin(testSuite, args);
         }
 
         private void TestSuite_OnTestPostprocessorComplete(TestSuite testSuite, TestProcessorResult testProcessorResult)
         {
-            _listenerServiceClient?.OnTestPostprocessorComplete(testSuite, testProcessorResult);
+            _listenerEventsClient?.OnTestPostprocessorComplete(testSuite, testProcessorResult);
         }
 
         private void TestSuite_OnExecutionComplete(TestScriptObject testScriptObject, TestScriptResult testScriptResult)
         {
-            _listenerServiceClient?.OnTestSuiteExecutionComplete((TestSuite)testScriptObject, (TestSuiteResult)testScriptResult);
+            _listenerEventsClient?.OnTestSuiteExecutionComplete((TestSuite)testScriptObject, (TestSuiteResult)testScriptResult);
         }
 
         private void TestCase_OnExecutionBegin(TestScriptObject testScriptObject, TestCaseBeginExecutionArgs args)
         {
             TestProperties.SetPropertyValue("CurrentTestCase", testScriptObject);
 
-            _listenerServiceClient?.OnTestCaseExecutionBegin((TestCase)testScriptObject, args);
+            _listenerEventsClient?.OnTestCaseExecutionBegin((TestCase)testScriptObject, args);
         }
 
         private void TestCase_OnExecutionComplete(TestScriptObject testScriptObject, TestScriptResult testScriptResult)
         {
-            _listenerServiceClient?.OnTestCaseExecutionComplete((TestCase)testScriptObject, (TestCaseResult)testScriptResult);
+            _listenerEventsClient?.OnTestCaseExecutionComplete((TestCase)testScriptObject, (TestCaseResult)testScriptResult);
         }
 
         private void TestStep_OnExecutionBegin(TestScriptObject testScriptObject, TestStepBeginExecutionArgs args)
         {
             TestProperties.SetPropertyValue("CurrentTestStep", testScriptObject);
 
-            _listenerServiceClient?.OnTestStepExecutionBegin((TestStep)testScriptObject, args);
+            _listenerEventsClient?.OnTestStepExecutionBegin((TestStep)testScriptObject, args);
         }
 
         private void TestStep_OnExecutionComplete(TestScriptObject testScriptObject, TestScriptResult testScriptResult)
         {
-            _listenerServiceClient?.OnTestStepExecutionComplete((TestStep)testScriptObject, (TestStepResult)testScriptResult);
+            _listenerEventsClient?.OnTestStepExecutionComplete((TestStep)testScriptObject, (TestStepResult)testScriptResult);
         }
 
         private void TestCheck_OnTestCheck(TestCheck testCheck)
         {
-            _listenerServiceClient?.OnTestCheck(testCheck);
+            _listenerEventsClient?.OnTestCheck(testCheck);
         }
 
         private void TestWarning_OnTestWarning(TestWarning testWarning)
         {
-            _listenerServiceClient?.OnTestWarning(testWarning);
+            _listenerEventsClient?.OnTestWarning(testWarning);
         }
 
         private void TestTrace_OnTestTrace(string virtualUser, string traceMessage)
         {
-            _listenerServiceClient?.OnTestTrace(virtualUser, traceMessage);
+            _listenerEventsClient?.OnTestTrace(virtualUser, traceMessage);
         }
 
         private void TestMetric_OnTestMetric(string virtualUser, TestMetricEventArgs args)
         {
-            _listenerServiceClient?.OnTestMetric(virtualUser, args);
+            _listenerEventsClient?.OnTestMetric(virtualUser, args);
         }
 
         #endregion

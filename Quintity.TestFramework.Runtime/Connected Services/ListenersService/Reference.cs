@@ -15,7 +15,7 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TestListenerDescriptor", Namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TestListenerDescriptor", Namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime")]
     [System.SerializableAttribute()]
     public partial class TestListenerDescriptor : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -205,7 +205,7 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TestListenersCompleteArgs", Namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TestListenersCompleteArgs", Namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime")]
     [System.SerializableAttribute()]
     public partial class TestListenersCompleteArgs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
