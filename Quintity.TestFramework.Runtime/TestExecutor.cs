@@ -9,7 +9,7 @@ using System.ServiceModel;
 
 namespace Quintity.TestFramework.Runtime
 {
-    public partial class TestExecutor
+    public partial class TestExecutor : IListenerEventsCallback
     {
         #region Class delegate and event declarations with helper functions.
 
@@ -139,6 +139,7 @@ namespace Quintity.TestFramework.Runtime
                     _testListeners = fixupTestListeners(testListeners);
 
                     _listenerEventsClient = getListenerEventsClient();
+                    _listenerEventsClient.InitializeService(convertToListenerServiceCollection(testListeners), _testProfile);
 
                     //if (qualifiedListeners != 0)
                     //{
@@ -170,6 +171,29 @@ namespace Quintity.TestFramework.Runtime
             {
                 LogEvent.Error(e.Message, e);
             }
+        }
+
+        private List<ListenersService.TestListenerDescriptor> convertToListenerServiceCollection(TestListenerCollection testListeners)
+        {
+            var serviceCollection = new List<ListenersService.TestListenerDescriptor>();
+
+            foreach (TestListenerDescriptor descriptor in testListeners)
+            {
+                serviceCollection.Add(
+                new ListenersService.TestListenerDescriptor()
+                {
+                    Name = descriptor.Name,
+                    Description = descriptor.Description,
+                    Status = descriptor.Status,
+                    OnFailure = descriptor.OnFailure,
+                    Assembly = descriptor.Assembly,
+                    Type = descriptor.Type,
+                    Parameters = descriptor.Parameters
+                }
+                );
+            }
+
+            return serviceCollection;
         }
 
         /// <summary>
@@ -450,6 +474,17 @@ namespace Quintity.TestFramework.Runtime
         private void TestClassBase_OnStopExecutionRequest(TerminationReason terminationSource, string explanation)
         {
             StopExecution(null, terminationSource, explanation);
+        }
+
+        public void TestListenersCompleteNotification(List<ListenersService.TestListenerDescriptor> testListeners, ListenersService.TestListenersCompleteArgs args)
+        {
+            int i = 1;
+            //throw new NotImplementedException();
+        }
+
+        public void TestListenersCompleteNotification(ListenersService.TestListenerDescriptor[] testListeners, ListenersService.TestListenersCompleteArgs args)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

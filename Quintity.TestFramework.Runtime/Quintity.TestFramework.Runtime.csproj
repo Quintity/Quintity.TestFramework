@@ -94,6 +94,12 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Quintity.TestFramework.Core\Quintity.TestFramework.Core.csproj">
+      <Project>{f6c3dc21-8c28-4a3d-9051-ece30747aea8}</Project>
+      <Name>Quintity.TestFramework.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ListenersService\" />
   </ItemGroup>
   <ItemGroup>
@@ -107,12 +113,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Quintity.TestFramework.Core\Quintity.TestFramework.Core.csproj">
-      <Project>{f6c3dc21-8c28-4a3d-9051-ece30747aea8}</Project>
-      <Name>Quintity.TestFramework.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

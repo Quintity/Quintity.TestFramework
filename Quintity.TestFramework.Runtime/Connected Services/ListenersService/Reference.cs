@@ -291,10 +291,10 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
         System.Threading.Tasks.Task<bool> ServiceAvailabilityAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListenerEvents/InitializeService", ReplyAction="http://tempuri.org/IListenerEvents/InitializeServiceResponse")]
-        int InitializeService(Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor[] testListeners, Quintity.TestFramework.Core.TestProfile testProfile);
+        int InitializeService(System.Collections.Generic.List<Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor> testListeners, Quintity.TestFramework.Core.TestProfile testProfile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListenerEvents/InitializeService", ReplyAction="http://tempuri.org/IListenerEvents/InitializeServiceResponse")]
-        System.Threading.Tasks.Task<int> InitializeServiceAsync(Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor[] testListeners, Quintity.TestFramework.Core.TestProfile testProfile);
+        System.Threading.Tasks.Task<int> InitializeServiceAsync(System.Collections.Generic.List<Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor> testListeners, Quintity.TestFramework.Core.TestProfile testProfile);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IListenerEvents/OnTestExecutionBegin")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Quintity.TestFramework.Core.TestScriptObjectContainer))]
@@ -412,7 +412,7 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
     public interface IListenerEventsCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IListenerEvents/TestListenersCompleteNotification")]
-        void TestListenersCompleteNotification(Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor[] testListeners, Quintity.TestFramework.Runtime.ListenersService.TestListenersCompleteArgs args);
+        void TestListenersCompleteNotification(System.Collections.Generic.List<Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor> testListeners, Quintity.TestFramework.Runtime.ListenersService.TestListenersCompleteArgs args);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -451,11 +451,11 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
             return base.Channel.ServiceAvailabilityAsync();
         }
         
-        public int InitializeService(Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor[] testListeners, Quintity.TestFramework.Core.TestProfile testProfile) {
+        public int InitializeService(System.Collections.Generic.List<Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor> testListeners, Quintity.TestFramework.Core.TestProfile testProfile) {
             return base.Channel.InitializeService(testListeners, testProfile);
         }
         
-        public System.Threading.Tasks.Task<int> InitializeServiceAsync(Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor[] testListeners, Quintity.TestFramework.Core.TestProfile testProfile) {
+        public System.Threading.Tasks.Task<int> InitializeServiceAsync(System.Collections.Generic.List<Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor> testListeners, Quintity.TestFramework.Core.TestProfile testProfile) {
             return base.Channel.InitializeServiceAsync(testListeners, testProfile);
         }
         
