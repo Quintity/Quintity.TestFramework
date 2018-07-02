@@ -101,7 +101,7 @@ namespace Quintity.TestFramework.TestRunner
                 }
             }
 
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
             executeTestSuite(testSuiteFile, testPropertiesFile, testPerformanceFile, testListenersFile, suppressExecution);
 
             return (int)exitCode;
@@ -121,7 +121,7 @@ namespace Quintity.TestFramework.TestRunner
 
         private static void TestCase_OnExecutionComplete(TestCase testCase, TestCaseResult testCaseResult)
         {
-            LogEvent.Info(message: $"Test case execution \"{testCase.Title}\" completed {testCaseResult.TestVerdict}.");
+            LogEvent.Info(message: $"Test case execution \"{testCase.Title}\" completed ({testCaseResult.TestVerdict}).");
         }
 
         private static void TestCase_OnExecutionBegin(TestCase testCase, TestCaseBeginExecutionArgs args)
@@ -205,7 +205,7 @@ namespace Quintity.TestFramework.TestRunner
 
             if (null == testSuite)
             {
-                LogEvent.Info("Exiting Quintity TestFramework Runtime");
+                LogEvent.Info("Exiting Quintity TestFramework TestConsole");
 
                 exitCode = ExitCode.TestSuiteError;
 
@@ -214,7 +214,7 @@ namespace Quintity.TestFramework.TestRunner
 
             if (!initializeTestListeners(testListenersFile))
             {
-                LogEvent.Info(message: "Exiting Quintity TestFramework Runtime");
+                LogEvent.Info(message: "Exiting Quintity TestFramework TestConsole");
 
                 exitCode = ExitCode.TestListenersError;
 
@@ -230,7 +230,12 @@ namespace Quintity.TestFramework.TestRunner
 
             manualReset.WaitOne();
 
-            LogEvent.Info(message: "Exiting Quintity TestFramework Runtime");
+            Console.WriteLine($"{Environment.NewLine}Press any key to continue...");
+            Console.ReadLine();
+
+            LogEvent.Info(message: "Exiting Quintity TestFramework TestConsole");
+            Thread.Sleep(1000);
+
         }
 
         private static TestSuite initializeTestSuite(string testSuiteFile)

@@ -9,39 +9,9 @@ using System.ServiceModel;
 
 namespace Quintity.TestFramework.Runtime
 {
-    public partial class TestExecutor : IListenerEventsCallback
+    public partial class TestExecutor
     {
         #region Class delegate and event declarations with helper functions.
-
-        //public delegate bool TraverseTestTreeDelegate(TestScriptObject testScriptObject, object tag);
-
-        //public static void TraverseTestTree(TestScriptObject testScriptObject, TraverseTestTreeDelegate traverseTestTreeDelegate)
-        //{
-        //    TraverseTestTree(testScriptObject, traverseTestTreeDelegate, null);
-        //}
-        
-        //public static void TraverseTestTree(TestScriptObject testScriptObject, TraverseTestTreeDelegate traverseTestTreeDelegate, object tag)
-        //{
-        //    m_continue = traverseTestTreeDelegate(testScriptObject, tag);
-
-        //    if (m_continue)
-        //    {
-        //        if (testScriptObject is TestScriptObjectContainer)
-        //        {
-        //            var container = testScriptObject as TestScriptObjectContainer;
-
-        //            foreach (TestScriptObject testscript in container.TestScriptObjects)
-        //            {
-        //                TraverseTestTree(testscript, traverseTestTreeDelegate, tag);
-
-        //                if (!m_continue)
-        //                {
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         public delegate void ExecutionBeginEventHandler(TestExecutor testExecutor, TestExecutionBeginArgs args);
         public static event ExecutionBeginEventHandler OnExecutionBegin;
@@ -140,19 +110,6 @@ namespace Quintity.TestFramework.Runtime
 
                     _listenerEventsClient = getListenerEventsClient();
                     _listenerEventsClient.InitializeService(convertToListenerServiceCollection(testListeners), _testProfile);
-
-                    //if (qualifiedListeners != 0)
-                    //{
-                    //    _testListenersComplete = false;
-
-                    //    ListenersService.Client.ListenerClient.OnTestListenersComplete += ListenerClient_OnTestListenersComplete;
-                    //}
-                    //else
-                    //{
-                    //    _listenerServiceClient = null;
-
-                    //    LogEvent.Info("The provided testlisteners configure did not contain any active or qualifying testlisteners");
-                    //}
                 }
 
                 ExecutionParameters executionParameters = new ExecutionParameters()
@@ -173,6 +130,13 @@ namespace Quintity.TestFramework.Runtime
             }
         }
 
+        /// <summary>
+        /// This is a bit of a hack.  Translates the core TestListenerCollection into a list
+        /// of ListenerService TestListenerDescriptors.  There is probably a better, more elegant
+        /// way to avoid this.
+        /// </summary>
+        /// <param name="testListeners">TestlistenerCollection</param>
+        /// <returns>List of ListenerService test listener d</returns>
         private List<ListenersService.TestListenerDescriptor> convertToListenerServiceCollection(TestListenerCollection testListeners)
         {
             var serviceCollection = new List<ListenersService.TestListenerDescriptor>();
@@ -226,19 +190,19 @@ namespace Quintity.TestFramework.Runtime
             return new TestListenerCollection(activeListeners) ;
         }
 
-        private void ListenerClient_OnTestListenersComplete(TestListenerCollection testListeners, TestListenersCompleteArgs args)
-        {
-            _testListenersComplete = true;
+        //private void ListenerClient_OnTestListenersComplete(TestListenerCollection testListeners, TestListenersCompleteArgs args)
+        //{
+        //    _testListenersComplete = true;
 
-            if(args.TerminationSource == TerminationReason.ListenerError)
-            {
-                StopExecution(null, args.TerminationSource, args.Explanation);
-            }
-            else if (_virtualUserRuntimeState.Count == 0)
-            {
-                fireTestExecutionFinalizedEvent();
-            }
-        }
+        //    if(args.TerminationSource == TerminationReason.ListenerError)
+        //    {
+        //        StopExecution(null, args.TerminationSource, args.Explanation);
+        //    }
+        //    else if (_virtualUserRuntimeState.Count == 0)
+        //    {
+        //        fireTestExecutionFinalizedEvent();
+        //    }
+        //}
 
 
         public void ExecuteTestCase(TestCase testCase, bool suppressExecution)
@@ -298,7 +262,8 @@ namespace Quintity.TestFramework.Runtime
 
         private ListenerEventsClient getListenerEventsClient()
         {
-            return new ListenersService.ListenerEventsClient(new InstanceContext(this));
+            //return new ListenersService.ListenerEventsClient(new InstanceContext(this));
+            return new ListenerEventsClient();
         }
 
         /// <summary>
@@ -474,17 +439,6 @@ namespace Quintity.TestFramework.Runtime
         private void TestClassBase_OnStopExecutionRequest(TerminationReason terminationSource, string explanation)
         {
             StopExecution(null, terminationSource, explanation);
-        }
-
-        public void TestListenersCompleteNotification(List<ListenersService.TestListenerDescriptor> testListeners, ListenersService.TestListenersCompleteArgs args)
-        {
-            int i = 1;
-            //throw new NotImplementedException();
-        }
-
-        public void TestListenersCompleteNotification(ListenersService.TestListenerDescriptor[] testListeners, ListenersService.TestListenersCompleteArgs args)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

@@ -203,85 +203,8 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
     public class TestScriptObjects : System.Collections.Generic.List<Quintity.TestFramework.Core.TestScriptObject> {
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TestListenersCompleteArgs", Namespace="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime")]
-    [System.SerializableAttribute()]
-    public partial class TestListenersCompleteArgs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExplanationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Quintity.TestFramework.Core.TerminationReason TerminationSourceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Quintity.TestFramework.Core.TestProfile TestProfileField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Explanation {
-            get {
-                return this.ExplanationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExplanationField, value) != true)) {
-                    this.ExplanationField = value;
-                    this.RaisePropertyChanged("Explanation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Quintity.TestFramework.Core.TerminationReason TerminationSource {
-            get {
-                return this.TerminationSourceField;
-            }
-            set {
-                if ((this.TerminationSourceField.Equals(value) != true)) {
-                    this.TerminationSourceField = value;
-                    this.RaisePropertyChanged("TerminationSource");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Quintity.TestFramework.Core.TestProfile TestProfile {
-            get {
-                return this.TestProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TestProfileField, value) != true)) {
-                    this.TestProfileField = value;
-                    this.RaisePropertyChanged("TestProfile");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ListenersService.IListenerEvents", CallbackContract=typeof(Quintity.TestFramework.Runtime.ListenersService.IListenerEventsCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ListenersService.IListenerEvents", SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IListenerEvents {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IListenerEvents/ServiceAvailability", ReplyAction="http://tempuri.org/IListenerEvents/ServiceAvailabilityResponse")]
@@ -409,38 +332,30 @@ namespace Quintity.TestFramework.Runtime.ListenersService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IListenerEventsCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IListenerEvents/TestListenersCompleteNotification")]
-        void TestListenersCompleteNotification(System.Collections.Generic.List<Quintity.TestFramework.Runtime.ListenersService.TestListenerDescriptor> testListeners, Quintity.TestFramework.Runtime.ListenersService.TestListenersCompleteArgs args);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IListenerEventsChannel : Quintity.TestFramework.Runtime.ListenersService.IListenerEvents, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ListenerEventsClient : System.ServiceModel.DuplexClientBase<Quintity.TestFramework.Runtime.ListenersService.IListenerEvents>, Quintity.TestFramework.Runtime.ListenersService.IListenerEvents {
+    public partial class ListenerEventsClient : System.ServiceModel.ClientBase<Quintity.TestFramework.Runtime.ListenersService.IListenerEvents>, Quintity.TestFramework.Runtime.ListenersService.IListenerEvents {
         
-        public ListenerEventsClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public ListenerEventsClient() {
         }
         
-        public ListenerEventsClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public ListenerEventsClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public ListenerEventsClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public ListenerEventsClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ListenerEventsClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public ListenerEventsClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ListenerEventsClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public ListenerEventsClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
         public bool ServiceAvailability() {

@@ -102,9 +102,6 @@
   <wsdl:message name="IListenerEvents_OnTestMetric_InputMessage">
     <wsdl:part name="parameters" element="tns:OnTestMetric" />
   </wsdl:message>
-  <wsdl:message name="IListenerEvents_TestListenersCompleteNotification_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:TestListenersCompleteNotification" />
-  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IListenerEvents">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ServiceAvailability">
       <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/ServiceAvailability" message="tns:IListenerEvents_ServiceAvailability_InputMessage" />
@@ -161,9 +158,6 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="OnTestMetric">
       <wsdl:input wsaw:Action="http://tempuri.org/IListenerEvents/OnTestMetric" message="tns:IListenerEvents_OnTestMetric_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TestListenersCompleteNotification">
-      <wsdl:output wsaw:Action="http://tempuri.org/IListenerEvents/TestListenersCompleteNotification" message="tns:IListenerEvents_TestListenersCompleteNotification_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IListenerEvents" type="tns:IListenerEvents">
@@ -283,12 +277,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="TestListenersCompleteNotification">
-      <soap12:operation soapAction="http://tempuri.org/IListenerEvents/TestListenersCompleteNotification" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ListenerEvents">

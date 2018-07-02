@@ -138,10 +138,6 @@ namespace Quintity.TestFramework.Runtime
             Debug.WriteLine("Unregistering runtime event handlers.");
             unregisterRuntimeEventHandlers();
 
-            // Unregister test client notification event.
-            //TODO:  ?
-            //_listenerServiceClient.OnTestCaseExecutionComplete -= ListenerClient_OnTestListenersComplete;
-
             // Remove currently executing TestScriptObjects from TestProperties (no long meaningful).
             TestProperties.RemoveProperty("CurrentTestSuite");
             TestProperties.RemoveProperty("CurrentTestCase");
@@ -161,14 +157,7 @@ namespace Quintity.TestFramework.Runtime
 
             if (_virtualUserRuntimeState.Count == 0)
             {
-                if (_testListenersComplete)
-                {
-                    fireTestExecutionFinalizedEvent();
-                }
-                else
-                {
-                    TestTrace.Trace("Processing test listeners events, standby...");
-                }
+                fireTestExecutionFinalizedEvent();
             }
         }
 

@@ -153,12 +153,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="TestListenersCompleteNotification">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime" minOccurs="0" name="testListeners" nillable="true" type="q28:ArrayOfTestListenerDescriptor" />
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Runtime" minOccurs="0" name="args" nillable="true" type="q29:TestListenersCompleteArgs" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 </xs:schema>

@@ -20,12 +20,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TestListenerDescriptor" nillable="true" type="tns:TestListenerDescriptor" />
-  <xs:complexType name="TestListenersCompleteArgs">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Explanation" nillable="true" type="xs:string" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" minOccurs="0" name="TerminationSource" type="q4:TerminationReason" />
-      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Quintity.TestFramework.Core" minOccurs="0" name="TestProfile" nillable="true" type="q5:TestProfile" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="TestListenersCompleteArgs" nillable="true" type="tns:TestListenersCompleteArgs" />
 </xs:schema>
