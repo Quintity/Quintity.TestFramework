@@ -332,17 +332,43 @@ namespace Quintity.TestFramework.Core
         }
 
         /// <summary>
-        /// Performs a shallow copy of the original test suite, changing only suite's file path system id and childre parent ids.
+        /// Makes a copy of the current test suite and writes to designated file path.
+        /// This method assigns new system IDs to new current test suite (and processors).  
+        /// Additionally does the same for each test case and the test cases test steps.
+        /// Important:  For immediate child test suites, the parent suite ID is update only.  
+        /// It does not iterate through any children or descendant test suites, updating test cases.
+        /// These test suites will need to be handled individually and parent suites updated accordingly
+        /// with newly saved child test suites.
         /// </summary>
         /// <param name="filePath"></param>
         public void FileSaveAs(string filePath)
         {
             _filePath = filePath;
             _systemId = Guid.NewGuid();
+            _testPreprocessor.SetSystemID(Guid.NewGuid());
+            _testPostProcessor.SetSystemID(Guid.NewGuid());
 
             foreach(var testScriptObject in _testScriptObjects)
             {
-                testScriptObject.SetParent(this);
+                if (testScriptObject is TestCase)
+                {
+                    var testCase = testScriptObject as TestCase;
+
+                    // Is a test case, so update it's system ID and parent ID.
+                    testCase.SetParent(this);
+                    testCase.SetSystemID(Guid.NewGuid());
+
+                    // Update each test case test step.
+                    foreach (var testStep in  testCase.TestSteps)
+                    {
+                        testStep.SetParent(testCase);
+                        testStep.SetSystemID(Guid.NewGuid());
+                    }
+                }
+                else
+                {
+                    testScriptObject.SetParent(this);
+                }
             }
             
             Write(this);
