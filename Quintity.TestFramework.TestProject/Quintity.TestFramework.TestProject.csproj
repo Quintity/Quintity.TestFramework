@@ -52,6 +52,10 @@
       <Project>{2c53ff3e-d97d-4112-b175-e4c2a6e4c7d2}</Project>
       <Name>Quintity.TestFramework.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Quintity.TestFramework.TestListeners\Quintity.TestFramework.TestListeners.csproj">
+      <Project>{39d7066e-9ee9-4c6b-8e35-b1f5037a3c69}</Project>
+      <Name>Quintity.TestFramework.TestListeners</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TestConfigs\TestListeners.config" />

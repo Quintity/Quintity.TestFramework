@@ -108,8 +108,11 @@ namespace Quintity.TestFramework.Runtime
 
                     _testListeners = fixupTestListeners(testListeners);
 
-                    _listenerEventsClient = getListenerEventsClient();
-                    _listenerEventsClient.InitializeService(convertToListenerServiceCollection(testListeners), _testProfile);
+                    if (_testListeners.Count > 0)
+                    {
+                        _listenerEventsClient = getListenerEventsClient();
+                        _listenerEventsClient.InitializeService(convertToListenerServiceCollection(testListeners), _testProfile);
+                    }
                 }
 
                 ExecutionParameters executionParameters = new ExecutionParameters()
@@ -262,8 +265,21 @@ namespace Quintity.TestFramework.Runtime
 
         private ListenerEventsClient getListenerEventsClient()
         {
-            //return new ListenersService.ListenerEventsClient(new InstanceContext(this));
-            return new ListenerEventsClient();
+            NetTcpBinding binding = new NetTcpBinding();
+            //binding.Security.Mode = SecurityMode.None;
+            binding.ReceiveTimeout = TimeSpan.FromDays(7);
+            binding.SendTimeout = TimeSpan.FromDays(7);
+
+            InstanceContext context = new InstanceContext(this);
+
+            EndpointAddress endPoint = new EndpointAddress("net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService");
+
+            ListenerEventsClient proxy = new ListenerEventsClient(binding, endPoint);
+
+            return proxy;
+            //return new ListenerEventsClient("net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService");
+           // return new ListenersService.ListenerEventsClient(new InstanceContext(this));
+            //return new ListenerEventsClient();
         }
 
         /// <summary>
