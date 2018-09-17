@@ -130,6 +130,7 @@ namespace Quintity.TestFramework.Runtime
             catch (Exception e)
             {
                 LogEvent.Error(e.Message, e);
+                throw;
             }
         }
 
@@ -237,7 +238,7 @@ namespace Quintity.TestFramework.Runtime
             _listenerEventsClient = null;
             _testListenersComplete = true;
 
-            fireTestExecutionFinalizedEvent();
+            finalizeTestExecution();
 
             // Kill off user execution threads, than main thread.
             if (_virtualUserThreads.Count > 0)
@@ -324,6 +325,8 @@ namespace Quintity.TestFramework.Runtime
 
             //Wait until signaled the execution is complete.
             _resetEvent.WaitOne();
+
+            Thread.Sleep(1000);
         }
 
         private void initializeVirtualUserStates(ExecutionParameters executionParameters)

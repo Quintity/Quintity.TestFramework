@@ -59,6 +59,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="NoOperationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestExecutor - Listeners.cs" />
     <Compile Include="TestExecutor.cs" />

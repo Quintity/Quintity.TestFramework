@@ -68,8 +68,6 @@ namespace Quintity.TestFramework.Runtime
             // TestExecutor events
             TestExecutor.OnExecutionBegin += TestExecutor_OnExecutionBegin;
             TestExecutor.OnExecutionComplete += TestExecutor_OnExecutionComplete;
-            // TestExecutor.OnTestListenerCompleteEvent += TestExecutor_OnTestListenerCompleteEvent;
-            TestExecutor.OnTestExecutionFinalizedEvent += TestExecutor_OnTestExecutionFinalizedEvent;
 
             // TestSuite events
             TestSuite.OnExecutionBegin += TestSuite_OnExecutionBegin;
@@ -99,8 +97,6 @@ namespace Quintity.TestFramework.Runtime
             // TestExecutor events
             TestExecutor.OnExecutionBegin -= TestExecutor_OnExecutionBegin;
             TestExecutor.OnExecutionComplete -= TestExecutor_OnExecutionComplete;
-            // TestExecutor.OnTestListenerCompleteEvent -= TestExecutor_OnTestListenerCompleteEvent;
-            TestExecutor.OnTestExecutionFinalizedEvent -= TestExecutor_OnTestExecutionFinalizedEvent;
 
             // TestSuite events
             TestSuite.OnExecutionBegin -= TestSuite_OnExecutionBegin;
@@ -153,12 +149,33 @@ namespace Quintity.TestFramework.Runtime
         {
             _listenerEventsClient?.OnTestExecutionComplete(args);
 
+            Thread.Sleep(3000);
+
+            var available = _listenerEventsClient?.ServiceAvailability();
+
+
             _virtualUserRuntimeState.Remove(args.VirtualUser);
 
-            if (_virtualUserRuntimeState.Count == 0)
+            if (_virtualUserRuntimeState.Count <= 0)
             {
-                fireTestExecutionFinalizedEvent();
+                finalizeTestExecution();
             }
+        }
+        
+        private void finalizeTestExecution()
+        {
+            //Debug.WriteLine("Unregistering runtime event handlers.");
+            unregisterRuntimeEventHandlers();
+
+            // Remove currently executing TestScriptObjects from TestProperties (no longer meaningful).
+            TestProperties.RemoveProperty("CurrentTestSuite");
+            TestProperties.RemoveProperty("CurrentTestCase");
+            TestProperties.RemoveProperty("CurrentTestStep");
+
+            fireTestExecutionFinalizedEvent();
+
+            // Signal/release main execution thread.
+            _resetEvent.Set();
         }
 
         private void TestSuite_OnExecutionBegin(TestScriptObject testScriptObject, TestSuiteBeginExecutionArgs args)

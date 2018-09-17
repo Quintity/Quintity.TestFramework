@@ -101,7 +101,6 @@ namespace Quintity.TestFramework.TestRunner
                 }
             }
 
-            //Thread.Sleep(5000);
             executeTestSuite(testSuiteFile, testPropertiesFile, testPerformanceFile, testListenersFile, suppressExecution);
 
             return (int)exitCode;
