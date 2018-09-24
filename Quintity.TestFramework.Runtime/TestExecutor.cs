@@ -270,6 +270,9 @@ namespace Quintity.TestFramework.Runtime
             //binding.Security.Mode = SecurityMode.None;
             binding.ReceiveTimeout = TimeSpan.FromDays(7);
             binding.SendTimeout = TimeSpan.FromDays(7);
+            binding.MaxReceivedMessageSize = int.MaxValue;
+            binding.MaxBufferPoolSize = int.MaxValue;
+            binding.MaxBufferSize = int.MaxValue;
 
             InstanceContext context = new InstanceContext(this);
 
@@ -278,9 +281,6 @@ namespace Quintity.TestFramework.Runtime
             ListenerEventsClient proxy = new ListenerEventsClient(binding, endPoint);
 
             return proxy;
-            //return new ListenerEventsClient("net.tcp://localhost:10101//Quintity.TestFramework.TestListenersService");
-           // return new ListenersService.ListenerEventsClient(new InstanceContext(this));
-            //return new ListenerEventsClient();
         }
 
         /// <summary>
@@ -438,8 +438,9 @@ namespace Quintity.TestFramework.Runtime
                 fireExecutionCompleteEvent(this, new TestExecutionCompleteArgs(Thread.CurrentThread.Name, executionParameters._testScriptObject, 
                     TerminationReason.Normal, _stopWatch.Elapsed));
             }
-            catch (ThreadAbortException)
+            catch (ThreadAbortException e)
             {
+                LogEvent.Error(e.ToString());
                 // Eat this exception as is handled by StopExecution method.
             }
             catch (Exception e)
