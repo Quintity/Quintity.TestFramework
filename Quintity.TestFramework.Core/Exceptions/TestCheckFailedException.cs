@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Quintity.TestFramework.Core.Exceptions
+namespace Quintity.TestFramework.Core
 {
     [DataContract]
     public class TestCheckFailedException : TestException

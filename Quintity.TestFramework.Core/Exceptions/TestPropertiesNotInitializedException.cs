@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Quintity.TestFramework.Core.Exceptions
+namespace Quintity.TestFramework.Core
 {
     public class TestPropertiesNotInitializedException : TestException
     {

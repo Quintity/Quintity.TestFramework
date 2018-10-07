@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Quintity.TestFramework.Core.Exceptions
+namespace Quintity.TestFramework.Core
 {
     public class TestPropertyEditorException : TestException
     {

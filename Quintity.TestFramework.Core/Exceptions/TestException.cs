@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Quintity.TestFramework.Core.Exceptions
+namespace Quintity.TestFramework.Core
 {
     /// <summary>
     /// Represents exceptions that are thrown when an error occurs during actions.

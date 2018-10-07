@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Quintity.TestFramework.Core.Exceptions
+namespace Quintity.TestFramework.Core
 {
     /// <summary>
     /// Used to indicate failure for a test. 
