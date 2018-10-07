@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Quintity.TestFramework.Core
+namespace Quintity.TestFramework.Core.Exceptions
 {
-    public class TestPropertyEditorException : ApplicationException
+    public class TestPropertyEditorException : TestException
     {
         public int RowIndex
         { get; set; }

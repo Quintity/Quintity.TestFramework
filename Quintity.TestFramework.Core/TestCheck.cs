@@ -7,6 +7,7 @@ using System;
 using System.Threading;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using Quintity.TestFramework.Core.Exceptions;
 
 namespace Quintity.TestFramework.Core
 {

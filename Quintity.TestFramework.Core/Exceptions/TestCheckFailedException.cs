@@ -1,10 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace Quintity.TestFramework.Core
+namespace Quintity.TestFramework.Core.Exceptions
 {
     [DataContract]
-    public class TestCheckFailedException : SystemException
+    public class TestCheckFailedException : TestException
     {
         #region Class data members
 

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Quintity.TestFramework.Core
+namespace Quintity.TestFramework.Core.Exceptions
 {
     /// <summary>
     /// Used to indicate failure for a test. 
     /// </summary>
     [DataContract]
-    public class TestAssertFailedException : Exception
+    public class TestAssertFailedException : TestException
     {
         /// <summary>
         /// Initializes a new instance of the AssertFailedExcepton class.

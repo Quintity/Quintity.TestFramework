@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Configuration;
 using System.Collections;
 using System.Collections.Generic;
+using Quintity.TestFramework.Core.Exceptions;
 
 namespace Quintity.TestFramework.Core
 {

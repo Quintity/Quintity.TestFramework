@@ -1,16 +1,12 @@
-﻿using System;
-using System.Runtime.Serialization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
-namespace Quintity.TestFramework.Core
+namespace Quintity.TestFramework.Core.Exceptions
 {
     /// <summary>
     /// Used to indicate failure for a test. 
     /// </summary>
     [DataContract]
-    public class MaxFailedTestChecksException : Exception
+    public class MaxFailedTestChecksException : TestException
     {
         /// <summary>
         /// Initializes a new instance of the AssertFailedExcepton class.
