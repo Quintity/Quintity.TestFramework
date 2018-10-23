@@ -27,6 +27,7 @@ namespace Quintity.TestFramework.Core
             OnTestStepFailure = testCase.OnTestStepFailure;
             Tags = testCase.Tags;
 
+
             foreach (var testStepResult in testCaseResult.TestStepResults)
             {
                 var testStep = testCase.TestSteps.Find(x => x.SystemID.CompareTo(testStepResult.ReferenceID) == 0);
