@@ -8,52 +8,109 @@ namespace Quintity.TestFramework.Core.Support
 {
     public class TestWait<T> : ITestWait<T>
     {
+        #region Data members
+
         private T input;
         private IClock clock;
-
         private TimeSpan timeout = DefaultSleepTimeout;
         private TimeSpan sleepInterval = DefaultSleepTimeout;
         private string message = string.Empty;
-
         private List<Type> ignoredExceptions = new List<Type>();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
-        /// </summary>
-        /// <param name="input">The input value to pass to the evaluated conditions.</param>
-        public TestWait(T input)
-            : this(input, new SystemClock())
-        {
-        }
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="input">The input value to pass to the evaluated conditions.</param>
-        /// <param name="clock">The clock to use when measuring the timeout.</param>
-        public TestWait(T input, IClock clock)
+        /// <param name="timeout">The timeout duration in milliseconds to test a condition.</param>
+        public TestWait(T input)
+            : this(input, string.Empty, DefaultSleepTimeout, DefaultSleepTimeout)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="input">The input value to pass to the evaluated conditions.</param>
+        /// <param name="timeout">The timeout duration in milliseconds to test a condition.</param>
+        public TestWait(T input, double timeout)
+            : this(input, string.Empty, TimeSpan.FromMilliseconds(timeout), DefaultSleepTimeout)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="input">The input value to pass to the evaluated conditions.</param>
+        /// <param name="timeout">The timeout duration to test a condition.</param>
+        public TestWait(T input, TimeSpan timeout)
+            : this(input, string.Empty, timeout, DefaultSleepTimeout)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="input">The input value to pass to the evaluated conditions.</param>
+        /// <param name="message">Message to added to timeout exception</param>
+        /// <param name="timeout">The timeout duration in milliseconds to test a condition.</param>
+        public TestWait(T input, string message, double timeout)
+            : this(input, message, TimeSpan.FromMilliseconds(timeout), DefaultSleepTimeout)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="input">The input value to pass to the evaluated conditions.</param>
+        /// <param name="message">Message to added to timeout exception</param>
+        /// <param name="timeout">The timeout duration in milliseconds to test a condition.</param>
+        /// <param name="pollingInterval">The wait time in milliseconds between condition executions.</param>
+        public TestWait(T input, string message, double timeout, double pollingInterval)
+            : this(input, message, TimeSpan.FromMilliseconds(timeout), TimeSpan.FromMilliseconds(pollingInterval))
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="input">The input value to pass to the evaluated conditions.</param>
+        /// <param name="message">Message to added to timeout exception</param>
+        /// <param name="timeout">The timeout duration to test a condition.</param>
+        public TestWait(T input, string message, TimeSpan timeout)
+            : this(input, message, timeout, DefaultSleepTimeout)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestWait&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="input">The input value to pass to the evaluated conditions.</param>
+        /// <param name="message">Message to added to timeout exception</param>
+        /// <param name="timeout">The timeout duration to test a condition.</param>
+        /// <param name="pollingInterval">The wait time between condition executions.</param>
+        public TestWait(T input, string message, TimeSpan timeout, TimeSpan pollingInterval )
         {
             if (input == null)
             {
                 throw new ArgumentNullException("input", "Input value cannot be null");
             }
 
-            if (clock == null)
-            {
-                throw new ArgumentNullException("clock", "Clock value cannot be null");
-            }
-
             this.input = input;
-            this.clock = clock;
+            this.message = message;
+            this.timeout = timeout;
+            sleepInterval = pollingInterval;
+            clock = new SystemClock();
         }
+
+        #endregion
+
+        #region Public members
 
         /// <summary>
         /// Gets or sets how long to wait for the evaluated condition to be true. The default timeout is 500 milliseconds.
         /// </summary>
         public TimeSpan Timeout
         {
-            get { return this.timeout; }
-            set { this.timeout = value; }
+            get { return timeout; }
+            set { timeout = value; }
         }
 
         /// <summary>
@@ -61,8 +118,8 @@ namespace Quintity.TestFramework.Core.Support
         /// </summary>
         public TimeSpan PollingInterval
         {
-            get { return this.sleepInterval; }
-            set { this.sleepInterval = value; }
+            get { return sleepInterval; }
+            set { sleepInterval = value; }
         }
 
         /// <summary>
@@ -70,13 +127,8 @@ namespace Quintity.TestFramework.Core.Support
         /// </summary>
         public string Message
         {
-            get { return this.message; }
-            set { this.message = value; }
-        }
-
-        private static TimeSpan DefaultSleepTimeout
-        {
-            get { return TimeSpan.FromMilliseconds(500); }
+            get { return message; }
+            set { message = value; }
         }
 
         /// <summary>
@@ -166,7 +218,8 @@ namespace Quintity.TestFramework.Core.Support
                 // with a zero timeout can succeed.
                 if (!this.clock.IsNowBefore(endTime))
                 {
-                    string timeoutMessage = string.Format(CultureInfo.InvariantCulture, "Timed out after {0} seconds", this.timeout.TotalSeconds);
+                    string timeoutMessage = string.Format(CultureInfo.InvariantCulture, "TestWait timeout elapsed after {0} seconds.", this.timeout.TotalSeconds);
+
                     if (!string.IsNullOrEmpty(this.message))
                     {
                         timeoutMessage += ": " + this.message;
@@ -178,6 +231,10 @@ namespace Quintity.TestFramework.Core.Support
                 Thread.Sleep(this.sleepInterval);
             }
         }
+
+        #endregion
+
+        #region Protected and private members
 
         /// <summary>
         /// Throws a <see cref="TestWaitTimeoutException"/> with the given message.
@@ -195,6 +252,13 @@ namespace Quintity.TestFramework.Core.Support
         {
             return this.ignoredExceptions.Any(type => type.IsAssignableFrom(exception.GetType()));
         }
+
+        private static TimeSpan DefaultSleepTimeout
+        {
+            get { return TimeSpan.FromMilliseconds(500); }
+        }
+
+        #endregion
     }
 
 }

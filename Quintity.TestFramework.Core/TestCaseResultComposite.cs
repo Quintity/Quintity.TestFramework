@@ -14,6 +14,9 @@ namespace Quintity.TestFramework.Core
         public OnFailure OnTestStepFailure { get; }
         public string Tags { get; }
 
+        public object TestStepResults
+        { get { return TestScripResultCollection; } }
+
         #region Constructors
 
         public TestCaseResultComposite(TestCase testCase, TestCaseResult testCaseResult)
@@ -30,13 +33,20 @@ namespace Quintity.TestFramework.Core
 
                 if (!(testStep is null))
                 {
-                    var testStepResultComposite = new TestStepResultComposite(testStep as TestStep, testStepResult as TestStepResult);
-
-                    // Need to define composite collection 
+                    TestScripResultCollection.Add(new TestStepResultComposite(testStep as TestStep, testStepResult as TestStepResult));
                 }
             }
         }
 
         #endregion
     }
+
+
+
+
+
+
+
+
+
 }

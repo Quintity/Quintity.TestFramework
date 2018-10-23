@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Quintity.TestFramework.Core
 {
@@ -16,6 +17,8 @@ namespace Quintity.TestFramework.Core
         public int Inconclusive { get; }
         public int Passed { get; }
         public int Total { get; }
+
+        internal List<TestScriptResultComposite> TestScripResultCollection = new List<TestScriptResultComposite>();
 
         #endregion
 

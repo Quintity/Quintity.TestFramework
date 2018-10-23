@@ -8,7 +8,6 @@ namespace Quintity.TestFramework.Core
 {
     class TestStepResultComposite : TestScriptResultComposite
     {
-
         #region Data members
 
         public bool AlwaysExecute { get; }
