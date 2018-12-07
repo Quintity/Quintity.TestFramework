@@ -116,4 +116,7 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>C:\Nuget\nuget.exe pack -sym $(ProjectPath)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
