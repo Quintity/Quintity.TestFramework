@@ -75,7 +75,10 @@ namespace Quintity.TestFramework.Core
 
         public override string ToString()
         {
-            return string.Format("Test verdict:  {0}\r\nTest case summary:  {1}", TestVerdict, base.ToString());
+            var preProcessor = TestPrePocessorResult != null ? "Test pre-processor:\r\n" + TestPrePocessorResult.ToString() + "--------------------\r\n" : null;
+            var postProcessor = TestPostPocessorResult != null ? "Test post-processor:\r\n" + TestPostPocessorResult.ToString() + "--------------------\r\n" : null;
+
+            return string.Format("{0}{1}Test case summary:  {2}", preProcessor, postProcessor, base.ToString());
         }
 
         #endregion

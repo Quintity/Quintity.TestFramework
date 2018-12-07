@@ -10,5 +10,9 @@ namespace Quintity.TestFramework.Core
     [DataContract]
     public class TestProcessorResult : TestStepResult
     {
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

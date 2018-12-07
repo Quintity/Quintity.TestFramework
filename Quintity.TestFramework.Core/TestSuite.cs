@@ -348,7 +348,7 @@ namespace Quintity.TestFramework.Core
             _testPreprocessor.SetSystemID(Guid.NewGuid());
             _testPostProcessor.SetSystemID(Guid.NewGuid());
 
-            foreach(var testScriptObject in _testScriptObjects)
+            foreach (var testScriptObject in _testScriptObjects)
             {
                 if (testScriptObject is TestCase)
                 {
@@ -359,7 +359,7 @@ namespace Quintity.TestFramework.Core
                     testCase.SetSystemID(Guid.NewGuid());
 
                     // Update each test case test step.
-                    foreach (var testStep in  testCase.TestSteps)
+                    foreach (var testStep in testCase.TestSteps)
                     {
                         testStep.SetParent(testCase);
                         testStep.SetSystemID(Guid.NewGuid());
@@ -370,7 +370,7 @@ namespace Quintity.TestFramework.Core
                     testScriptObject.SetParent(this);
                 }
             }
-            
+
             Write(this);
         }
 
@@ -822,7 +822,7 @@ namespace Quintity.TestFramework.Core
             }
         }
 
-        
+
         private bool availableTestCases(TestScriptObject testScriptObject, object tag)
         {
             if (testScriptObject is TestCase && testScriptObject.Status == Core.Status.Active)
@@ -836,7 +836,7 @@ namespace Quintity.TestFramework.Core
             return true;
         }
 
-        
+
         private List<TestCase> getRandomSampleTestCases(TestFilter filter)
         {
             List<TestCase> sampledTestCases = new List<TestCase>();
@@ -976,7 +976,7 @@ namespace Quintity.TestFramework.Core
         //    return _allTags.Distinct<string>().ToList<string>();
         //}
 
-       
+
 
         //private bool gatherAllTags(TestScriptObject testScriptObject, object tag)
         //{
@@ -1037,14 +1037,12 @@ namespace Quintity.TestFramework.Core
 
                     fireTestPreprocessorComplete(this, processorResult);
 
-                    if (!TestPreprocessor.IgnoreResult)
-                    {
-                        //Update test suite result.
-                        testSuiteResult.SetTestPreprocessorResult(processorResult);
-                    }
+                    //Update test suite result.
+                    testSuiteResult.SetTestPreprocessorResult(processorResult);
                 }
 
-                if (processorResult.TestVerdict != TestVerdict.Fail || TestPreprocessor.OnFailure != OnFailure.Stop)
+                if ((processorResult.TestVerdict != TestVerdict.Fail && processorResult.TestVerdict != TestVerdict.Error) ||
+                    TestPreprocessor.OnFailure != OnFailure.Stop)
                 {
                     // Iterate through suites test script objects
                     foreach (TestScriptObject testScriptObject in TestScriptObjects)
@@ -1073,18 +1071,27 @@ namespace Quintity.TestFramework.Core
                         }
                     }
                 }
+                else
+                {
+                    if (!TestPreprocessor.IgnoreResult)
+                    {
+                        testSuiteResult.SetTestVerdict(processorResult.TestVerdict);
+                        testSuiteResult.SetTestMessage("The test pre-processor failed, test suite execution stopped per setting.");
+                    }
+                    else
+                    {
+                        testSuiteResult.SetTestMessage("The test pre-processor failure ignored per setting.");
+                    }
+                }
 
                 // Execute post-processor
                 if (TestPostprocessor.Status == Core.Status.Active)
                 {
-                    //if (!TestExecutor.SuppressExecution)
-                    //{
                     fireTestPostprocessorBegin(this, new TestProcessorBeginExecutionArgs(virtualUser));
 
                     processorResult = TestPostprocessor.Execute();
 
                     fireTestPostprocessorComplete(this, processorResult);
-                    //}
 
                     if (!TestPostprocessor.IgnoreResult)
                     {
@@ -1095,7 +1102,7 @@ namespace Quintity.TestFramework.Core
             }
             else
             {
-                testSuiteResult.SetTestVerdict(TestVerdict.DidNotExecute);
+               // testSuiteResult.SetTestVerdict(TestVerdict.DidNotExecute);
                 testSuiteResult.SetTestMessage("The test suite is set to \"Active\", however it does not contain any active test cases or suites.");
             }
 
@@ -1110,7 +1117,7 @@ namespace Quintity.TestFramework.Core
 
             return testSuiteResult;
         }
-     
+
         #endregion
     }
 }
