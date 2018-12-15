@@ -219,9 +219,9 @@ namespace Quintity.TestFramework.Core
             string currentUser = Thread.CurrentThread.Name;
             FireExecutionBeginEvent(this, new TestCaseBeginExecutionArgs(currentUser));
 
-            TestCaseResult result = new TestCaseResult();
-            result.SetReferenceID(SystemID);
-            result.SetVirtualUser(currentUser);
+            TestCaseResult testCaseResult = new TestCaseResult();
+            testCaseResult.SetReferenceID(SystemID);
+            testCaseResult.SetVirtualUser(currentUser);
 
             // Save copy of test property collection for restoration later (maintains scope)
             TestPropertyCollection savedTestPropertyCollection = new TestPropertyCollection(Core.TestProperties.TestPropertyCollection);
@@ -232,7 +232,7 @@ namespace Quintity.TestFramework.Core
 
             List<TestScriptObject> activeTestSteps = getActiveChildren();
 
-            result.SetStartTime(DateTime.Now);
+            testCaseResult.SetStartTime(DateTime.Now);
 
             if (activeTestSteps.Count > 0)
             {
@@ -245,16 +245,17 @@ namespace Quintity.TestFramework.Core
                         // Stop if test case already failed (i.e., a previous test step has failed...UNLESS
                         // a) the test case is marked to continue on failure (continue regardless of previous failures.
                         // b) a specific test step is marked to always execute (regardless of previous failures).
-                        if ((result.TestVerdict != TestVerdict.Fail || OnTestStepFailure == OnFailure.Continue) || testStep.AlwaysExecute)
+                        if ((testCaseResult.TestVerdict != TestVerdict.Fail || OnTestStepFailure == OnFailure.Continue) || testStep.AlwaysExecute)
                         {
+                            var producerResult = getProducerStepResult(testStep, testCaseResult);
                             var testStepResult = testStep.Execute(_testClassDictionary);
 
-                            result.AddResult(testStepResult);
-                            result.IncrementCounter(testStepResult.TestVerdict);
+                            testCaseResult.AddResult(testStepResult);
+                            testCaseResult.IncrementCounter(testStepResult.TestVerdict);
 
                             if (testStepResult.TestVerdict != TestVerdict.Pass)
                             {
-                                result.FinalizeVerdict();
+                                testCaseResult.FinalizeVerdict();
                             }
                         }
                         else
@@ -262,8 +263,8 @@ namespace Quintity.TestFramework.Core
                             var testStepResult = new TestStepResult(TestVerdict.DidNotExecute,
                                 "Did not execute as a previous step failed the test case." +
                                 "  To always run, consider setting the \"Always Run\" property to true.");
-                            result.AddResult(testStepResult);
-                            result.IncrementCounter(testStepResult.TestVerdict);
+                            testCaseResult.AddResult(testStepResult);
+                            testCaseResult.IncrementCounter(testStepResult.TestVerdict);
                             testStep.FireExecutionCompleteEvent(testStep, testStepResult);
                         }
                     }
@@ -271,19 +272,40 @@ namespace Quintity.TestFramework.Core
             }
             else
             {
-                result.SetTestVerdict(TestVerdict.DidNotExecute);
-                result.SetTestMessage("The test case is set to \"Active\", however it does not contain active test steps.");
+                testCaseResult.SetTestVerdict(TestVerdict.DidNotExecute);
+                testCaseResult.SetTestMessage("The test case is set to \"Active\", however it does not contain active test steps.");
             }
 
-            result.SetEndTime(DateTime.Now);
-            result.FinalizeVerdict();
+            testCaseResult.SetEndTime(DateTime.Now);
+            testCaseResult.FinalizeVerdict();
 
             // Restore preserved test property collection.
             Core.TestProperties.SetTestPropertyCollection(savedTestPropertyCollection);
 
-            FireExecutionCompleteEvent(this, result);
+            FireExecutionCompleteEvent(this, testCaseResult);
 
-            return result;
+            return testCaseResult;
+        }
+
+        private TestVerdict getProducerStepResult(TestStep testStep, TestCaseResult testCaseResult)
+        {
+            TestVerdict testVerdict = TestVerdict.Unknown;
+            TestScriptResult dependencySupplier = null;
+
+            if (testStep.DependsOn.HasValue && testStep.DependsOn != Guid.Empty)
+            {
+                foreach (var testStepResult in testCaseResult.TestStepResults)
+                {
+                    if (testStepResult.ReferenceID == testStep.DependsOn)
+                    {
+                        dependencySupplier = testStepResult;
+                        testVerdict = dependencySupplier.TestVerdict;
+                        break;
+                    }
+                }
+            }
+
+            return testVerdict;
         }
 
         public void Write(XmlTextWriter xmlWriter)

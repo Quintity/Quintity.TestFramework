@@ -161,6 +161,30 @@ namespace Quintity.TestFramework.Core
             }
         }
 
+        [DataMember(Order = 24)]
+        [Browsable(false)]
+        private Guid? _dependsOn;
+
+        [CategoryAttribute("Runtime Settings"),
+        DisplayName("Depends On"), 
+        DescriptionAttribute("Dependent test step."),
+        PropertyOrder(23),
+        DefaultValue(0)]
+        [Browsable(true)]
+        public Guid? DependsOn
+        {
+            get { return _dependsOn; }
+            set
+            {
+                if (_dependsOn != value)
+                {
+                    object oldValue = _dependsOn;
+                    _dependsOn = value;
+                    notifyTestPropertyChangedEvent(new TestPropertyChangedEventArgs(oldValue, value));
+                }
+            }
+        }
+
         #endregion
 
         #region Class constructors
@@ -268,6 +292,7 @@ namespace Quintity.TestFramework.Core
             // Write automated test expected results (Pass/Fail)
             xmlWriter.WriteElementString("ExpectedTestVerdict", _expectedTestVerdict.ToString());
             xmlWriter.WriteElementString("AlwaysExecute", _alwaysExecute.ToString());
+            xmlWriter.WriteElementString("DependsOn", _dependsOn.ToString());
 
             // Currently unused
             xmlWriter.WriteElementString("Iterations", _iterations.ToString());
@@ -300,6 +325,11 @@ namespace Quintity.TestFramework.Core
             _title = TestUtils.GetXPathValue(nav, "Title");
             Enum.TryParse(TestUtils.GetXPathValue(nav, "ExpectedTestVerdict"), out _expectedTestVerdict);
             bool.TryParse(TestUtils.GetXPathValue(nav, "AlwaysExecute"), out _alwaysExecute);
+
+            var dependsOn = TestUtils.GetXPathValue(nav, "DependsOn");
+            _dependsOn = string.IsNullOrEmpty(dependsOn) ? null : new Guid(dependsOn) as Guid?;
+
+            //_dependsOn = new Guid(TestUtils.GetXPathValue(nav, "DependsOn"));
             int.TryParse(TestUtils.GetXPathValue(nav, "Iterations"), out _iterations);
             _description = TestUtils.GetXPathValue(nav, "Description");
             _expectedBehaviour = TestUtils.GetXPathValue(nav, "ExpectedBehaviour");
